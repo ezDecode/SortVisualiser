@@ -10,8 +10,18 @@ const barLabels = document.getElementById("bar-labels");
 const comparisonsElement = document.getElementById("comparisons");
 const swapsElement = document.getElementById("swaps");
 
-// Socket.IO connection
-const socket = io();
+// Socket.IO connection with error handling
+const socket = io({
+  reconnectionAttempts: 5,
+  timeout: 10000,
+  transports: ["websocket", "polling"],
+});
+
+// Handle connection errors
+socket.on("connect_error", (error) => {
+  console.error("Connection error:", error);
+  alert("Failed to connect to server. Please refresh the page.");
+});
 
 // State
 let isSorting = false;
@@ -133,9 +143,8 @@ socket.on("sortStep", (step) => {
 socket.on("sortComplete", ({ array }) => {
   stepBuffer = [];
   processingStep = false;
-  // Ensure bars are shown in sorted order
-  const sorted = [...array].sort((a, b) => a - b);
-  renderBars(sorted);
+  // Use the final sorted array from the server
+  renderBars(array);
   const bars = document.querySelectorAll(".bar");
   bars.forEach((bar) => {
     bar.classList.add("sorted");
@@ -173,11 +182,28 @@ pauseButton.addEventListener("click", () => {
 
 // Initialize with random array
 function initializeRandomArray() {
-  const size = 10;
+  const size = Math.floor(Math.random() * 6) + 8; // Random size between 8-13
+
+  // Generate array with more diverse values
   const array = Array.from(
     { length: size },
     () => Math.floor(Math.random() * 100) + 1
   );
+
+  // Ensure some duplicates for interesting sorting scenarios
+  if (size > 8) {
+    const duplicateIndex = Math.floor(Math.random() * (size - 1));
+    array[duplicateIndex + 1] = array[duplicateIndex];
+  }
+
+  // Ensure some values are already in order
+  if (Math.random() > 0.5 && size > 5) {
+    const orderStart = Math.floor(Math.random() * (size - 3));
+    for (let i = 0; i < 3; i++) {
+      array[orderStart + i] = 20 + i * 5;
+    }
+  }
+
   arrayInput.value = array.join(",");
   renderBars(array);
 }

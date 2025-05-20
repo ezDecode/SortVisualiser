@@ -6,15 +6,10 @@
   "scripts": {
     "start": "node server/server.js",
     "dev": "nodemon server/server.js",
-    "health-check": "node server-check.js",
-    "postinstall": "echo 'Installation completed successfully!'",
-    "predeploy": "echo 'Preparing for deployment...'",
-    "deploy": "echo 'See deploy.md for deployment instructions'",
-    "prepare-gh-pages": "node prepare-gh-pages.js",
-    "deploy-gh-pages": "npm run prepare-gh-pages && git subtree push --prefix gh-pages origin gh-pages"
+    "postinstall": "echo 'Installation completed successfully!'"
   },
   "dependencies": {
-    "compression": "^1.8.0",
+    "compression": "^1.7.4",
     "express": "^4.18.2",
     "socket.io": "^4.7.2"
   },
@@ -26,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/SortVisualiser.git"
+    "url": ""
   },
   "keywords": [
     "sorting",

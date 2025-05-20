@@ -13,9 +13,11 @@ const io = socketIO(server, {
   pingInterval: 25000,
   transports: ["websocket", "polling"],
   cors: {
-    origin: "*", // Allow all origins for Vercel deployment
+    origin: process.env.NODE_ENV === "production" ? false : "*",
     methods: ["GET", "POST"],
   },
+  connectTimeout: 45000,
+  maxHttpBufferSize: 1e6, // 1MB
 });
 
 // Enable compression for all HTTP responses
@@ -163,7 +165,14 @@ io.on("connection", (socket) => {
         }
 
         try {
-          sortingAlgorithms[algorithm] = require(algorithmPaths[algorithm]);
+          // Verify the algorithm file exists before requiring it
+          const algorithmPath = require.resolve(algorithmPaths[algorithm]);
+          sortingAlgorithms[algorithm] = require(algorithmPath);
+
+          // Verify the loaded module is a function
+          if (typeof sortingAlgorithms[algorithm] !== "function") {
+            throw new Error(`Algorithm ${algorithm} is not a valid function`);
+          }
         } catch (loadError) {
           console.error(`Failed to load algorithm ${algorithm}:`, loadError);
           throw new Error(`Failed to load algorithm ${algorithm}`);
