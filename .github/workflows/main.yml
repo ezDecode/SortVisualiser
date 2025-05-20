@@ -56,3 +56,7 @@ jobs:
           folder: gh-pages # The folder the action should deploy
           branch: gh-pages # The branch the action should deploy to
           token: ${{ secrets.GITHUB_TOKEN }} # Use the GitHub token for authentication
+          clean: true # Automatically remove deleted files from the deploy branch
+          commit-message: "Deploy to GitHub Pages [skip ci]" # Custom commit message
+          git-config-name: GitHub Actions
+          git-config-email: github-actions@github.com
