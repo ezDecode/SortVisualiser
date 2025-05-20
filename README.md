@@ -1,136 +1,142 @@
-# 🧮 Sorting Algorithm Visualizer
+# Sorting Algorithm Visualizer
 
-A real-time web-based visualization tool for sorting algorithms, built with vanilla JavaScript, Node.js, Express, and Socket.IO. This interactive application helps you understand how different sorting algorithms work by providing step-by-step visual representations.
+An interactive web application that visualizes various sorting algorithms in real-time. Watch how different sorting algorithms work and compare their performance through an intuitive visual interface.
 
-![Sorting Algorithm Visualizer](https://img.shields.io/badge/Sorting-Visualizer-3498db.svg)
-![License](https://img.shields.io/badge/License-MIT-2ecc71.svg)
+## Features
 
-## ✨ Features
+- **Multiple Sorting Algorithms:**
 
-- **Interactive Visualization** of sorting algorithms in real-time
-- **Multiple Algorithms** supported:
   - Bubble Sort
   - Quick Sort
   - Merge Sort
-- **Real-time Updates** using WebSocket communication via Socket.IO
-- **Customizable Input** - create your own arrays or generate random ones
-- **Adjustable Speed** - slow, medium, or fast visualization
-- **Pause & Resume** functionality to study the sorting process
-- **Statistics Tracking** - monitor comparisons and swaps in real-time
-- **Responsive Design** with smooth animations for all device sizes
-- **GitHub Pages Support** with automatic synchronization
+  - Insertion Sort
+  - Selection Sort
+  - Heap Sort
+  - Shell Sort
+  - Counting Sort
+  - Radix Sort
 
-## 🚀 Setup
+- **Interactive Controls:**
+
+  - Custom array input
+  - Random array generation
+  - Adjustable sorting speed (Slow, Medium, Fast)
+  - Pause/Resume functionality
+
+- **Real-time Visualization:**
+  - Step-by-step sorting process
+  - Comparison and swap highlighting
+  - Performance metrics (comparisons and swaps)
+  - Bar height representation of values
+
+## Technologies Used
+
+- **Frontend:**
+
+  - HTML5
+  - CSS3
+  - JavaScript (ES6+)
+  - Socket.IO Client
+
+- **Backend:**
+  - Node.js
+  - Express.js
+  - Socket.IO
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm (Node Package Manager)
+
+### Installation
 
 1. Clone the repository:
 
-```bash
-git clone https://github.com/yourusername/sorting-visualizer.git
-cd sorting-visualizer
-```
+   ```bash
+   git clone https://github.com/yourusername/sorting-visualizer.git
+   cd sorting-visualizer
+   ```
 
 2. Install dependencies:
 
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
 3. Start the server:
 
-```bash
-npm start
-```
+   ```bash
+   node server/server.js
+   ```
 
 4. Open your browser and navigate to:
+   ```
+   http://localhost:3000
+   ```
+
+## Usage
+
+1. **Input Array:**
+
+   - Enter numbers manually (comma-separated)
+   - Use the "Randomize" button to generate a random array
+   - Maximum 20 numbers allowed
+
+2. **Select Algorithm:**
+
+   - Choose from 9 different sorting algorithms
+   - Each algorithm has its own visualization pattern
+
+3. **Adjust Speed:**
+
+   - Slow: 1000ms delay
+   - Medium: 500ms delay
+   - Fast: 100ms delay
+
+4. **Start Sorting:**
+   - Click "Start" to begin visualization
+   - Use "Pause" to pause the sorting process
+   - Watch the comparisons and swaps in real-time
+
+## Project Structure
 
 ```
-http://localhost:3000
+sorting-visualizer/
+├── public/
+│   ├── index.html
+│   ├── styles.css
+│   └── script.js
+├── server/
+│   ├── server.js
+│   └── algorithms/
+│       ├── bubbleSort.js
+│       ├── quickSort.js
+│       ├── mergeSort.js
+│       ├── insertionSort.js
+│       ├── selectionSort.js
+│       ├── heapSort.js
+│       ├── shellSort.js
+│       ├── countingSort.js
+│       └── radixSort.js
+└── package.json
 ```
 
-## 💻 Development
+## Contributing
 
-For development with auto-reload:
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-```bash
-npm run dev
-```
-
-To sync changes from docs/ to GitHub Pages deployment:
-
-```bash
-npm run sync-docs
-```
-
-## 🔍 How It Works
-
-The application uses a client-server architecture:
-
-### Backend (Node.js + Express + Socket.IO)
-
-- The server hosts the static files and provides real-time communication through WebSockets
-- Each sorting algorithm is implemented as a separate module in the `server/algorithms` directory
-- The server processes sorting operations and emits step-by-step updates to clients
-- Sorting operations can be paused and resumed through Socket.IO events
-
-### Frontend (HTML + CSS + JavaScript + Socket.IO Client)
-
-- The UI provides controls for array input, algorithm selection, and visualization speed
-- Bars represent array elements with heights proportional to their values
-- Color-coding indicates the current state of elements:
-  - Blue: Default state
-  - Red: Elements being compared
-  - Yellow: Elements being swapped
-  - Green: Sorted elements
-- Real-time statistics show the number of comparisons and swaps performed
-
-## 📖 Algorithm Details
-
-### Bubble Sort
-
-- Time Complexity: O(n²)
-- Space Complexity: O(1)
-- A simple comparison algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order.
-
-### Quick Sort
-
-- Time Complexity: O(n log n) average, O(n²) worst case
-- Space Complexity: O(log n)
-- Uses a divide-and-conquer strategy with a pivot element to partition the array.
-
-### Merge Sort
-
-- Time Complexity: O(n log n)
-- Space Complexity: O(n)
-- A stable, divide-and-conquer algorithm that divides the array into halves, sorts them, and then merges them.
-
-## 📱 Usage
-
-1. Enter numbers in the input field (comma-separated, max 20 elements)
-2. Select a sorting algorithm (Bubble Sort, Quick Sort, or Merge Sort)
-3. Choose sorting speed (Slow, Medium, or Fast)
-4. Click "Start" to begin visualization
-5. Use "Pause/Resume" to control the process
-6. Monitor comparisons and swaps in real-time
-7. Click "Randomize" to generate a new random array
-
-## 🛠️ Technologies Used
-
-- **Frontend**: Vanilla HTML, CSS, JavaScript
-- **Backend**: Node.js, Express
-- **Real-time Communication**: Socket.IO
-- **Fonts**: Satoshi-Medium (custom font for better UI)
-- **Deployment**: GitHub Pages compatibility
-
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🤝 Contributing
+## Acknowledgments
 
-Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/amazing-feature`)
-3. Commit your Changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the Branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+- Inspired by various sorting algorithm visualizations
+- Built with modern web technologies
+- Special thanks to the open-source community
