@@ -13,7 +13,7 @@ const io = socketIO(server, {
   pingInterval: 25000,
   transports: ["websocket", "polling"],
   cors: {
-    origin: process.env.NODE_ENV === "production" ? false : "*",
+    origin: "*", // Allow all origins for Vercel deployment
     methods: ["GET", "POST"],
   },
 });
