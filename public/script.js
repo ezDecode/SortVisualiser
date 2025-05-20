@@ -158,12 +158,39 @@ socket.on("sortStep", (step) => {
 socket.on("sortComplete", ({ array }) => {
   stepBuffer = [];
   processingStep = false;
-  // Use the final sorted array from the server
+
+  // Display the final sorted array
   renderBars(array);
+
+  // Add a visual indication that sorting is complete
   const bars = document.querySelectorAll(".bar");
   bars.forEach((bar) => {
     bar.classList.add("sorted");
   });
+
+  // Show a brief message that sorting is complete
+  const message = document.createElement("div");
+  message.className = "sort-complete-message";
+  message.textContent = "Sorting Complete!";
+  message.style.position = "absolute";
+  message.style.top = "50%";
+  message.style.left = "50%";
+  message.style.transform = "translate(-50%, -50%)";
+  message.style.backgroundColor = "rgba(0, 128, 0, 0.8)";
+  message.style.color = "white";
+  message.style.padding = "10px 20px";
+  message.style.borderRadius = "5px";
+  message.style.fontWeight = "bold";
+  message.style.zIndex = "100";
+  barsContainer.appendChild(message);
+
+  // Remove the message after 2 seconds
+  setTimeout(() => {
+    if (message.parentNode) {
+      message.parentNode.removeChild(message);
+    }
+  }, 2000);
+
   isSorting = false;
   startButton.disabled = false;
   pauseButton.disabled = true;

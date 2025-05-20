@@ -267,6 +267,45 @@ body {
 
 .bar.sorted {
     background: linear-gradient(180deg, #2ecc71 80%, #27ae60 100%);
+    animation: pulse 1.5s ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scaleY(1);
+    }
+
+    50% {
+        transform: scaleY(1.05);
+    }
+
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+.sort-complete-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(46, 204, 113, 0.9);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 100;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 #bar-labels {

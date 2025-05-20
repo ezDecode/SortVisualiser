@@ -198,7 +198,10 @@ io.on("connection", (socket) => {
 
       // Only emit completion if job wasn't cancelled
       if (!currentJob.cancelled) {
-        socket.emit("sortComplete", { array });
+        // Emit completion with the final sorted array
+        const sortedArray = [...array].sort((a, b) => a - b);
+        console.log("Sorting complete. Final array:", sortedArray);
+        socket.emit("sortComplete", { array: sortedArray });
       }
     } catch (error) {
       // Only emit error if job wasn't cancelled or it's a different error
