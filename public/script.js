@@ -10,17 +10,32 @@ const barLabels = document.getElementById("bar-labels");
 const comparisonsElement = document.getElementById("comparisons");
 const swapsElement = document.getElementById("swaps");
 
-// Socket.IO connection with error handling
+// Socket.IO connection with robust error handling
 const socket = io({
   reconnectionAttempts: 5,
+  reconnectionDelay: 1000,
   timeout: 10000,
   transports: ["websocket", "polling"],
+  autoConnect: true,
+  forceNew: true,
 });
 
 // Handle connection errors
 socket.on("connect_error", (error) => {
   console.error("Connection error:", error);
-  alert("Failed to connect to server. Please refresh the page.");
+  document.getElementById("bars-container").innerHTML =
+    '<div style="color: red; text-align: center; width: 100%; padding: 20px;">' +
+    "<h3>Failed to connect to server</h3>" +
+    "<p>Please make sure the server is running and refresh the page.</p>" +
+    "<p>Error: " +
+    error.message +
+    "</p>" +
+    "</div>";
+});
+
+// Handle successful connection
+socket.on("connect", () => {
+  console.log("Connected to server successfully");
 });
 
 // State
@@ -210,3 +225,16 @@ function initializeRandomArray() {
 
 initializeRandomArray();
 pauseButton.disabled = true;
+
+// Check connection status after a timeout
+setTimeout(() => {
+  if (!socket.connected) {
+    console.warn("Socket not connected after timeout");
+    document.getElementById("bars-container").innerHTML =
+      '<div style="color: orange; text-align: center; width: 100%; padding: 20px;">' +
+      "<h3>Waiting for server connection...</h3>" +
+      "<p>If this message persists, please check if the server is running.</p>" +
+      '<button onclick="location.reload()" style="padding: 8px 16px; background: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px;">Refresh Page</button>' +
+      "</div>";
+  }
+}, 5000);

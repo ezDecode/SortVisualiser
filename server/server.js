@@ -252,8 +252,19 @@ process.on("unhandledRejection", (reason, promise) => {
   // Keep the server running despite unhandled rejections
 });
 
-// Start server with optimized settings
+// Start server with optimized settings and error handling
 const PORT = process.env.PORT || 3000;
+server.on("error", (error) => {
+  if (error.code === "EADDRINUSE") {
+    console.error(
+      `Port ${PORT} is already in use. Please close the application using this port or use a different port.`
+    );
+    process.exit(1);
+  } else {
+    console.error("Server error:", error);
+  }
+});
+
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(
