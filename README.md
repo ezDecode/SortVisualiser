@@ -28,6 +28,7 @@ An interactive web application that visualizes various sorting algorithms in rea
   - Comparison and swap highlighting
   - Performance metrics (comparisons and swaps)
   - Bar height representation of values
+  - Sorted graph display after algorithm completion
 
 ## Technologies Used
 
@@ -55,8 +56,8 @@ An interactive web application that visualizes various sorting algorithms in rea
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/sorting-visualizer.git
-   cd sorting-visualizer
+   git clone https://github.com/ezDecode/SortVisualiser.git
+   cd SortVisualiser
    ```
 
 2. Install dependencies:
@@ -99,15 +100,17 @@ An interactive web application that visualizes various sorting algorithms in rea
    - Click "Start" to begin visualization
    - Use "Pause" to pause the sorting process
    - Watch the comparisons and swaps in real-time
+   - View the final sorted graph after algorithm completion
 
 ## Project Structure
 
 ```
-sorting-visualizer/
+SortVisualiser/
 ├── public/
 │   ├── index.html
 │   ├── styles.css
-│   └── script.js
+│   ├── script.js
+│   └── fonts/
 ├── server/
 │   ├── server.js
 │   └── algorithms/
@@ -120,7 +123,11 @@ sorting-visualizer/
 │       ├── shellSort.js
 │       ├── countingSort.js
 │       └── radixSort.js
-└── package.json
+├── package.json
+├── package-lock.json
+├── .gitignore
+├── LICENSE
+└── vercel.json
 ```
 
 ## Contributing
